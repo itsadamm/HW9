@@ -69,6 +69,7 @@ public class HerokuApplication {
   @RequestMapping("/db")
   String db(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
+      System.out.println("Adam Adri");
       Statement stmt = connection.createStatement();
       stmt.executeUpdate("CREATE TABLE IF NOT EXISTS table_timestamp_and_random_string (tick timestamp, random_string varchar(30))");
       stmt.executeUpdate("INSERT INTO table_timestamp_and_random_string VALUES (now(), '" + getRandomString() + "')");
@@ -85,6 +86,8 @@ public class HerokuApplication {
       model.put("message", e.getMessage());
       return "error";
     }
+
+
   }
 
   @Bean
